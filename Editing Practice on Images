@@ -1,0 +1,64 @@
+import cv2
+
+img = cv2.imread("C:/Users/vinee/Downloads/download.jpg",-1)
+img = cv2.resize(img, (460,300))
+img = cv2.putText(img, 'You Rock!!!', (50,250), cv2.FONT_HERSHEY_DUPLEX,2, (0,255,0),3,cv2.LINE_AA)
+print('Saturated')
+cv2.imshow('Image',img)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+img = cv2.imread("C:/Users/vinee/Downloads/download.jpg",1)
+img = cv2.resize(img, (460,300))
+img = cv2.putText(img, 'You Rock!!!', (50,250), cv2.FONT_HERSHEY_DUPLEX,2, (0,255,0),3,cv2.LINE_AA)
+print('Original')
+cv2.imshow('Image',img)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+import cv2
+path = input('Provide Path to Image ==  ')
+#path = 'C:/Users/vinee/Downloads/download.jpg'
+comment =input('Add your Comments to the Image == ')
+
+
+def Display_and_Save_the_Gray(x,y):
+    img = cv2.imread(x)
+    img = cv2.putText(img, y, (2,50), cv2.FONT_HERSHEY_DUPLEX,0.8, (0,0,255))
+    Gray_Image = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    cv2.namedWindow('Image',cv2.WINDOW_AUTOSIZE)
+    cv2.imwrite('C:/Users/vinee/Downloads/GrayedImage.jpg',Gray_Image)
+    cv2.imshow('Image',Gray_Image)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+    
+Display_and_Save_the_Gray(path,comment)
+
+import cv2
+import numpy as np
+path ='C:/Users/vinee/Downloads/download.jpg'
+photo = cv2.imread(path)
+image = cv2.imshow('Original', photo)
+(a,b)=input('Enter Expected Aspect Ratio of the Image seperated by comma : ').split(',')
+a,b = int(a), int(b)
+CropInAspectRatio(photo,a,b)
+def CropInAspectRatio(img,x,y):
+    h,w = img.shape[:2]
+    z = int(x+y)
+    p = (x/z)
+    q = (y/z)
+    w = int(w*p)
+    h = int(h*q)
+    print (w,h)
+    cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    cv2.resize(img,(w,h))
+    cv2.imshow('Image',img)
+    return img
+#CropInAspectRatio(photo,a,b)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
