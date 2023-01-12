@@ -1,0 +1,42 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+import cv2
+
+MyMobileCamera = 'https://192.168.137.251:8080/video'
+cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+cap.open(MyMobileCamera)
+print(cap.isOpened())
+while (cap.isOpened()):
+    ret, frame = cap.read()
+    if ret == True:
+        frame = cv2.resize(frame, (420,420))
+        #gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        #cv2.namedWindow('True')
+        cv2.imshow('Gray_Image',frame)
+        if cv2.waitKey(1)  & 0xFF == ord('q'):
+            break
+cap.release()            
+cv2.destroyAllWindows()
+
+
+import cv2
+import pafy
+
+url = 'https://youtu.be/_9geEbZIAJM'
+data = pafy.new(url)
+data = data.getbest(preftype = 'mp')
+cap = cv2.VideoCapture(0)
+cap.open(data.url)
+
+while (cap.isOpened()):
+    ret, frame = cap.read()
+    if ret == True:
+        cv2.imshow('Youtube',frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+cap.release()
+cv2.destroyAllWindows()
+    
